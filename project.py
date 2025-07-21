@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from google.generativeai import configure, GenerativeModel
 import os
 
 # Streamlit setup
