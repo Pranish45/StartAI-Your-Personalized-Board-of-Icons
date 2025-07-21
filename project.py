@@ -1,13 +1,13 @@
 import streamlit as st
-from google.generativeai import configure, GenerativeModel
+import google.generativeai as genai
 import os
 
 # Streamlit setup
 st.set_page_config(page_title="StartAI – Gemini Mentor Panel", layout="centered")
 st.title("🌟 StartAI – Create Your Dream Mentor Panel")
 
-# Set Gemini API key
-genai.configure(api_key=os.getenv("AIzaSyCjvR39xym6c9bEdo_qaPkwI0LUC7qw-Mo"))
+# Get the Gemini API key securely
+api_key = st.secrets.get("GEMINI_API_KEY", "")
 
 # UI Inputs
 mentor_name = st.text_input("👤 Mentor Name", placeholder="e.g., Elon Musk, Indra Nooyi")
