@@ -4,10 +4,10 @@ import os
 
 # Streamlit setup
 st.set_page_config(page_title="StartAI – Gemini Mentor Panel", layout="centered")
-st.title("🌟 StartAI – Create Your Dream Mentor Panel (Gemini-Powered)")
+st.title("🌟 StartAI – Create Your Dream Mentor Panel")
 
 # Set Gemini API key
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=os.getenv("AIzaSyCjvR39xym6c9bEdo_qaPkwI0LUC7qw-Mo"))
 
 # UI Inputs
 mentor_name = st.text_input("👤 Mentor Name", placeholder="e.g., Elon Musk, Indra Nooyi")
@@ -18,22 +18,22 @@ context = st.text_area("📄 Optional: Describe your startup or current challeng
 # Prompt Builder
 def generate_persona_prompt(name, domain, query, context):
     return f"""
-You are {name}, a legendary leader in the {domain} industry.
+    You are {name}, a legendary leader in the {domain} industry.
+    
+    A young startup founder is asking for your guidance. Please:
+    - Use your typical personality and leadership tone
+    - Share industry-specific advice and bold thinking
+    - Inspire them with practical steps and mental models
+    - Mention relevant failure patterns or startup cases if any
 
-A young startup founder is asking for your guidance. Please:
-- Use your typical personality and leadership tone
-- Share industry-specific advice and bold thinking
-- Inspire them with practical steps and mental models
-- Mention relevant failure patterns or startup cases if any
+    Startup Context:
+    {context}
 
-Startup Context:
-{context}
+    Founder’s Question:
+    {query}
 
-Founder’s Question:
-{query}
-
-Now respond as {name}, speaking directly to the founder.
-"""
+    Now respond as {name}, speaking directly to the founder.
+    """
 
 # Generate Advice
 if st.button("🎯 Get Mentor Advice"):
@@ -43,7 +43,7 @@ if st.button("🎯 Get Mentor Advice"):
         prompt = generate_persona_prompt(mentor_name, domain, query, context)
         with st.spinner("Consulting your AI-powered mentor..."):
             try:
-                model = genai.GenerativeModel("gemini-pro")
+                model = genai.GenerativeModel("gemini-2.0-flash")
                 response = model.generate_content(prompt)
                 st.success(f"✅ Advice from {mentor_name}:")
                 st.markdown(response.text)
